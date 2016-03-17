@@ -10,10 +10,15 @@ class MoviesController < ApplicationController
       
     # will render app/views/movies/show.<extension> by default
   end
-
+  
+  def movie
+    return @all_ratings
+  end
+  
+  
   def index
     
-    
+      @all_ratings = ['G','PG','PG-13','R']
       sort = params[:sort_by]
       if sort == 'title'
          @movies = Movie.all.order(title: :asc)
