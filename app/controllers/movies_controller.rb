@@ -19,15 +19,31 @@ class MoviesController < ApplicationController
   def index
     
       @all_ratings = ['G','PG','PG-13','R']
+      
+      
+      puts params
+      rating = params[:ratings]
+      
+      
+      
       sort = params[:sort_by]
-      if sort == 'title'
+      @rating_m = ["G", "PG", "PG-13", "R"]
+      @rating_m = rating
+      
+      
+      if sort == "title"
          @movies = Movie.all.order(title: :asc)
          @hilite = "hilite"
-      elsif sort == 'date'
+      elsif sort == "date"
         @movies = Movie.all.order(release_date: :asc)
-      else
+        @hilite_data = "hilite"
+      elsif @rating_m !=nil
+          @movies = Movie.all.select{|m|@rating_m.include?(m.rating)}
+        else
           @movies = Movie.all
-      end
+          
+          end
+     #debugger
   end
 
   def new
