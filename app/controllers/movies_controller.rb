@@ -20,8 +20,11 @@ class MoviesController < ApplicationController
     
       @all_ratings = ['G','PG','PG-13','R']
       
-      if params[:ratings] 
+    if params[:ratings] 
       @ratings = params[:ratings]
+    elsif session[:ratings] 
+      @ratings = session[:ratings]
+        
     else
       @ratings = @all_ratings
     end
