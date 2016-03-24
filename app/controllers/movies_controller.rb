@@ -20,17 +20,17 @@ class MoviesController < ApplicationController
     
       @all_ratings = ['G','PG','PG-13','R']
       
-      if params !=nil
+      if params[:ratings] 
       @ratings = params[:ratings]
+    else
+      @ratings = @all_ratings
     end
-      puts params
-      rating = params[:ratings]
+      
       #byebug
       
       
       sort = params[:sort_by]
-      @rating_m = ["G", "PG", "PG-13", "R"]
-      @rating_m = rating
+      
       
       
       if sort == "title"
@@ -39,8 +39,8 @@ class MoviesController < ApplicationController
       elsif sort == "date"
         @movies = Movie.all.order(release_date: :asc)
         @hilite_data = "hilite"
-      elsif @rating_m !=nil
-          @movies = Movie.all.select{|m|@rating_m.include?(m.rating)}
+      elsif @ratings !=nil
+          @movies = Movie.all.select{|m|@ratings.include?(m.rating)}
         else
           @movies = Movie.all
           session[:sort_by]= sort
