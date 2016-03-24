@@ -41,6 +41,7 @@ class MoviesController < ApplicationController
           @movies = Movie.all.select{|m|@rating_m.include?(m.rating)}
         else
           @movies = Movie.all
+          session[:sort_by]= sort
           
           end
      #debugger
