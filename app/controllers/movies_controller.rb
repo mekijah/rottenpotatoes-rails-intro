@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
       
       puts params
       rating = params[:ratings]
-      
+      #byebug
       
       
       sort = params[:sort_by]
